@@ -1,3 +1,8 @@
-export * from './lib/async';
-export * from './lib/hash';
-export * from './lib/number';
+import service from './service';
+import hooks from './hooks';
+
+export * from './hooks';
+export * from './types';
+export { hooks };
+
+export default service;
