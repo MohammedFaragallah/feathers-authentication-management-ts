@@ -29,10 +29,9 @@
     "doc:json": "typedoc src/ --exclude **/*.spec.ts --target ES6 --mode file --json build/docs/typedoc.json",
     "doc:publish": "gh-pages -m \"[ci skip] Updates\" -d build/docs",
     "version": "standard-version",
-    "reset": "git clean -dfx && git reset --hard && npm i",
+    "reset": "git clean -dfx && git reset --hard && yarn",
     "clean": "trash build test",
-    "prepare-release": "run-s reset test cov:check doc:html version doc:publish",
-    "preinstall": "node -e \"if(process.env.npm_execpath.indexOf('yarn') === -1) throw new Error('feathers-authentication-management-ts must be installed with Yarn: https://yarnpkg.com/')\""
+    "prepare-release": "run-s reset test cov:check doc:html version doc:publish"
   },
   "scripts-info": {
     "info": "Display information about the package scripts",
