@@ -1,12 +1,14 @@
 import errors from '@feathersjs/errors';
 import makeDebug from 'debug';
-import { comparePasswords } from './helpers';
-import { ensureObjPropsValid } from './helpers';
-import { ensureValuesAreStrings } from './helpers';
-import { getUserData } from './helpers';
-import { hashPassword } from './helpers';
-import { notifier } from './helpers';
-import { Types, Options, User, Password } from './types';
+import {
+	comparePasswords,
+	ensureObjPropsValid,
+	ensureValuesAreStrings,
+	getUserData,
+	hashPassword,
+	notifier,
+} from './helpers';
+import { Options, Password, User } from './types';
 
 const debug = makeDebug('authLocalManagement:passwordChange');
 
@@ -39,6 +41,6 @@ export const passwordChange = async (
 		password: await hashPassword(options.app, password, field),
 	});
 
-	const user3 = await notifier(options.notifier, Types.passwordChange, user2);
+	const user3 = await notifier(options.notifier, 'passwordChange', user2);
 	return options.sanitizeUserForClient(user3);
 };

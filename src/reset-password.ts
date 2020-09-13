@@ -1,15 +1,16 @@
 import errors from '@feathersjs/errors';
-import makeDebug from 'debug';
-
-import { comparePasswords } from './helpers';
-import { deconstructId } from './helpers';
-import { ensureObjPropsValid } from './helpers';
-import { ensureValuesAreStrings } from './helpers';
-import { getUserData } from './helpers';
-import { hashPassword } from './helpers';
-import { notifier } from './helpers';
-import { Options, Types, User, Tokens, Token, Password } from './types';
 import { Params } from '@feathersjs/feathers';
+import makeDebug from 'debug';
+import {
+	comparePasswords,
+	deconstructId,
+	ensureObjPropsValid,
+	ensureValuesAreStrings,
+	getUserData,
+	hashPassword,
+	notifier,
+} from './helpers';
+import { Options, Password, Token, Tokens, User } from './types';
 
 const debug = makeDebug('authLocalManagement:resetPassword');
 
@@ -119,6 +120,6 @@ const resetPassword = async (
 		resetExpires: null,
 	});
 
-	const user3 = await notifier(options.notifier, Types.resetPwd, user2);
+	const user3 = await notifier(options.notifier, 'resetPwd', user2);
 	return options.sanitizeUserForClient(user3);
 };

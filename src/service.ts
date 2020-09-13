@@ -1,7 +1,6 @@
 import errors from '@feathersjs/errors';
 import { Application } from '@feathersjs/feathers';
 import makeDebug from 'debug';
-
 import { checkUnique } from './check-unique';
 import { sanitizeUserForClient } from './helpers';
 import hooks from './hooks';
@@ -13,7 +12,7 @@ import {
 	resetPwdWithShortToken,
 } from './reset-password';
 import { sendResetPwd } from './send-reset-pwd';
-import { Actions, Options, Types } from './types';
+import { Actions, Options } from './types';
 import {
 	verifySignupWithLongToken,
 	verifySignupWithShortToken,
@@ -63,7 +62,7 @@ export const authLocalMgntMethods = (options: Options) => {
 			debug(`create called. action=${data.action}`);
 
 			switch (data.action) {
-				case Types.checkUnique:
+				case 'checkUnique':
 					return checkUnique(
 						options,
 						data.value,
@@ -71,20 +70,20 @@ export const authLocalMgntMethods = (options: Options) => {
 						data.meta || {},
 					);
 
-				case Types.resendVerifySignup:
+				case 'resendVerifySignup':
 					return resendVerifySignup(options, data.value, data.notifierOptions);
 
-				case Types.verifySignupLong:
+				case 'verifySignupLong':
 					return verifySignupWithLongToken(options, data.value);
 
-				case Types.verifySignupShort:
+				case 'verifySignupShort':
 					return verifySignupWithShortToken(
 						options,
 						data.value.token,
 						data.value.user,
 					);
 
-				case Types.verifySignupSetPasswordLong:
+				case 'verifySignupSetPasswordLong':
 					return verifySignupSetPasswordWithLongToken(
 						options,
 						data.value.token,
@@ -92,7 +91,7 @@ export const authLocalMgntMethods = (options: Options) => {
 						passwordField,
 					);
 
-				case Types.verifySignupSetPasswordShort:
+				case 'verifySignupSetPasswordShort':
 					return verifySignupSetPasswordWithShortToken(
 						options,
 						data.value.token,
@@ -101,7 +100,7 @@ export const authLocalMgntMethods = (options: Options) => {
 						passwordField,
 					);
 
-				case Types.sendResetPwd:
+				case 'sendResetPwd':
 					return sendResetPwd(
 						options,
 						data.value,
@@ -109,7 +108,7 @@ export const authLocalMgntMethods = (options: Options) => {
 						passwordField,
 					);
 
-				case Types.resetPwdLong:
+				case 'resetPwdLong':
 					return resetPwdWithLongToken(
 						options,
 						data.value.token,
@@ -117,7 +116,7 @@ export const authLocalMgntMethods = (options: Options) => {
 						passwordField,
 					);
 
-				case Types.resetPwdShort:
+				case 'resetPwdShort':
 					return resetPwdWithShortToken(
 						options,
 						data.value.token,
@@ -126,7 +125,7 @@ export const authLocalMgntMethods = (options: Options) => {
 						passwordField,
 					);
 
-				case Types.passwordChange:
+				case 'passwordChange':
 					return passwordChange(
 						options,
 						data.value.user,
@@ -135,7 +134,7 @@ export const authLocalMgntMethods = (options: Options) => {
 						passwordField,
 					);
 
-				case Types.identityChange:
+				case 'identityChange':
 					return identityChange(
 						options,
 						data.value.user,
@@ -143,7 +142,7 @@ export const authLocalMgntMethods = (options: Options) => {
 						data.value.changes,
 					);
 
-				case Types.options:
+				case 'options':
 					return Promise.resolve(options);
 
 				default:

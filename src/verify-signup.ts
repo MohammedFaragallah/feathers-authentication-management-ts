@@ -1,12 +1,13 @@
 import errors from '@feathersjs/errors';
-import makeDebug from 'debug';
-
-import { ensureObjPropsValid } from './helpers';
-import { ensureValuesAreStrings } from './helpers';
-import { getUserData } from './helpers';
-import { notifier } from './helpers';
-import { Types, User, Options, Tokens, Token } from './types';
 import { Params } from '@feathersjs/feathers';
+import makeDebug from 'debug';
+import {
+	ensureObjPropsValid,
+	ensureValuesAreStrings,
+	getUserData,
+	notifier,
+} from './helpers';
+import { Options, Token, Tokens, User } from './types';
 
 const debug = makeDebug('authLocalManagement:verifySignup');
 
@@ -75,6 +76,6 @@ const verifySignup = async (
 		user1.verifyExpires > Date.now(),
 		user1.verifyChanges || {},
 	);
-	const user3 = await notifier(options.notifier, Types.verifySignup, user2);
+	const user3 = await notifier(options.notifier, 'verifySignup', user2);
 	return options.sanitizeUserForClient(user3);
 };

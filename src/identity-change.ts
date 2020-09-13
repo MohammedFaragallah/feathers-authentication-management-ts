@@ -1,12 +1,14 @@
 import errors from '@feathersjs/errors';
 import makeDebug from 'debug';
-import { comparePasswords } from './helpers';
-import { ensureObjPropsValid } from './helpers';
-import { getLongToken } from './helpers';
-import { getShortToken } from './helpers';
-import { getUserData } from './helpers';
-import { notifier } from './helpers';
-import { Types, Options, User, Password } from './types';
+import {
+	comparePasswords,
+	ensureObjPropsValid,
+	getLongToken,
+	getShortToken,
+	getUserData,
+	notifier,
+} from './helpers';
+import { Options, Password, User } from './types';
 
 const debug = makeDebug('authLocalManagement:identityChange');
 
@@ -47,11 +49,6 @@ export const identityChange = async (
 		verifyChanges: changesIdentifyUser,
 	});
 
-	const user3 = await notifier(
-		options.notifier,
-		Types.identityChange,
-		user2,
-		null,
-	);
+	const user3 = await notifier(options.notifier, 'identityChange', user2, null);
 	return options.sanitizeUserForClient(user3);
 };

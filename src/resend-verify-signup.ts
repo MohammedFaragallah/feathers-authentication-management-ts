@@ -1,10 +1,12 @@
 import makeDebug from 'debug';
-import { ensureObjPropsValid } from './helpers';
-import { getLongToken } from './helpers';
-import { getShortToken } from './helpers';
-import { getUserData } from './helpers';
-import { notifier } from './helpers';
-import { Types, Options, User, NotifierOptions } from './types';
+import {
+	ensureObjPropsValid,
+	getLongToken,
+	getShortToken,
+	getUserData,
+	notifier,
+} from './helpers';
+import { NotifierOptions, Options, User } from './types';
 
 const debug = makeDebug('authLocalManagement:resendVerifySignup');
 
@@ -39,7 +41,7 @@ export const resendVerifySignup = async (
 
 	const user3 = await notifier(
 		options.notifier,
-		Types.resendVerifySignup,
+		'resendVerifySignup',
 		user2,
 		notifierOptions,
 	);

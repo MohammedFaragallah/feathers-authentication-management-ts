@@ -107,77 +107,74 @@ export interface Options {
 	sanitizeUserForClient: (user: User) => Partial<typeof user>;
 }
 
-export enum Types {
-	resendVerifySignup = 'resendVerifySignup',
-	verifySignup = 'verifySignup',
-	sendResetPwd = 'sendResetPwd',
-	resetPwd = 'resetPwd',
-	passwordChange = 'passwordChange',
-	identityChange = 'identityChange',
-
-	checkUnique = 'checkUnique',
-	verifySignupLong = 'verifySignupLong',
-	verifySignupShort = 'verifySignupShort',
-	resetPwdLong = 'resetPwdLong',
-	resetPwdShort = 'resetPwdShort',
-	options = 'options',
-
-	verifySignupSetPassword = 'verifySignupSetPassword',
-	verifySignupSetPasswordLong = 'verifySignupSetPasswordLong',
-	verifySignupSetPasswordShort = 'verifySignupSetPasswordShort',
-}
+export type Types =
+	| 'resendVerifySignup'
+	| 'verifySignup'
+	| 'sendResetPwd'
+	| 'resetPwd'
+	| 'passwordChange'
+	| 'identityChange'
+	| 'checkUnique'
+	| 'verifySignupLong'
+	| 'verifySignupShort'
+	| 'resetPwdLong'
+	| 'resetPwdShort'
+	| 'options'
+	| 'verifySignupSetPassword'
+	| 'verifySignupSetPasswordLong'
+	| 'verifySignupSetPasswordShort';
 
 export interface CheckUnique {
-	action: Types.checkUnique;
+	action: 'checkUnique';
 	value: User;
 	ownId: OwnId;
 	meta: Meta;
 }
 export interface ResendVerifySignup {
-	action: Types.resendVerifySignup;
+	action: 'resendVerifySignup';
 	value: User;
 	notifierOptions: NotifierOptions;
 }
 export interface VerifySignupLong {
-	action: Types.verifySignupLong;
+	action: 'verifySignupLong';
 	value: Token;
 }
 export interface VerifySignupShort {
-	action: Types.verifySignupShort;
+	action: 'verifySignupShort';
 	value: { user: User; token: Token };
 }
 export interface VerifySignupSetPasswordLong {
-	action: Types.verifySignupSetPasswordLong;
+	action: 'verifySignupSetPasswordLong';
 	value: { token: Token; password: Password };
 }
 export interface VerifySignupSetPasswordShort {
-	action: Types.verifySignupSetPasswordShort;
+	action: 'verifySignupSetPasswordShort';
 	value: { token: Token; password: Password; user: User };
 }
 export interface SendResetPwd {
-	action: Types.sendResetPwd;
+	action: 'sendResetPwd';
 	value: User;
 	notifierOptions: NotifierOptions;
 	passwordField?: string;
 }
 export interface ResetPwdLong {
-	action: Types.resetPwdLong;
+	action: 'resetPwdLong';
 	value: { token: Token; password: Password };
 }
 export interface ResetPwdShort {
-	action: Types.resetPwdShort;
+	action: 'resetPwdShort';
 	value: { token: Token; password: Password; user: User };
 }
 export interface PasswordChange {
-	action: Types.passwordChange;
+	action: 'passwordChange';
 	value: { oldPassword: Password; password: Password; user: User };
 }
 export interface IdentityChange {
-	action: Types.identityChange;
+	action: 'identityChange';
 	value: { changes: Changes; password: Password; user: User };
 }
 export interface GetOptions {
-	action: Types.options;
+	action: 'options';
 }
 
 export type Actions =

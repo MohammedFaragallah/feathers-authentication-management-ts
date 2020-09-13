@@ -1,12 +1,14 @@
 import makeDebug from 'debug';
-import { concatIDAndHash } from './helpers';
-import { ensureObjPropsValid } from './helpers';
-import { getLongToken } from './helpers';
-import { getShortToken } from './helpers';
-import { getUserData } from './helpers';
-import { hashPassword } from './helpers';
-import { notifier } from './helpers';
-import { Types, Options, User, NotifierOptions } from './types';
+import {
+	concatIDAndHash,
+	ensureObjPropsValid,
+	getLongToken,
+	getShortToken,
+	getUserData,
+	hashPassword,
+	notifier,
+} from './helpers';
+import { NotifierOptions, Options, User } from './types';
 
 const debug = makeDebug('authLocalManagement:sendResetPwd');
 
@@ -40,7 +42,7 @@ export const sendResetPwd = async (
 		),
 	});
 
-	notifier(options.notifier, Types.sendResetPwd, user2, notifierOptions);
+	notifier(options.notifier, 'sendResetPwd', user2, notifierOptions);
 	const user3 = await usersService.patch(user2[usersServiceIdName], {
 		resetExpires: user2.resetExpires,
 		resetToken: await hashPassword(options.app, user2.resetToken, field),

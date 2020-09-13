@@ -1,21 +1,14 @@
 import errors from '@feathersjs/errors';
 import { Params } from '@feathersjs/feathers';
 import makeDebug from 'debug';
-
-import { ensureObjPropsValid } from './helpers';
-import { ensureValuesAreStrings } from './helpers';
-import { getUserData } from './helpers';
-import { hashPassword } from './helpers';
-import { notifier } from './helpers';
 import {
-	Options,
-	Tokens,
-	Types,
-	User,
-	Changes,
-	Token,
-	Password,
-} from './types';
+	ensureObjPropsValid,
+	ensureValuesAreStrings,
+	getUserData,
+	hashPassword,
+	notifier,
+} from './helpers';
+import { Changes, Options, Password, Token, Tokens, User } from './types';
 
 const debug = makeDebug('authLocalMgnt:verifySignupSetPassword');
 
@@ -129,7 +122,7 @@ async function verifySignupSetPassword(
 
 	const user3 = await notifier(
 		options.notifier,
-		Types.verifySignupSetPassword,
+		'verifySignupSetPassword',
 		user2,
 	);
 

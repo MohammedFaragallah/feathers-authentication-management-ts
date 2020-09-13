@@ -1,15 +1,13 @@
 import { AuthenticationClient } from '@feathersjs/authentication-client';
 import { Application } from '@feathersjs/feathers';
-
 import {
 	AuthManagementService,
 	NotifierOptions,
 	Options,
 	OwnId,
-	Types,
-	User,
-	Token,
 	Password,
+	Token,
+	User,
 } from './types';
 
 declare module '@feathersjs/feathers' {
@@ -35,7 +33,7 @@ export default class AuthManagement {
 
 	checkUnique(identifyUser: User, ownId: OwnId, noErrMsg: boolean) {
 		return this.authManagement.create({
-			action: Types.checkUnique,
+			action: 'checkUnique',
 			value: identifyUser,
 			ownId,
 			meta: { noErrMsg },
@@ -44,7 +42,7 @@ export default class AuthManagement {
 
 	resendVerifySignup(identifyUser: User, notifierOptions: NotifierOptions) {
 		return this.authManagement.create({
-			action: Types.resendVerifySignup,
+			action: 'resendVerifySignup',
 			value: identifyUser,
 			notifierOptions,
 		});
@@ -52,21 +50,21 @@ export default class AuthManagement {
 
 	verifySignupLong(verifyToken: Token) {
 		return this.authManagement.create({
-			action: Types.verifySignupLong,
+			action: 'verifySignupLong',
 			value: verifyToken,
 		});
 	}
 
 	verifySignupShort(verifyShortToken: Token, identifyUser: User) {
 		return this.authManagement.create({
-			action: Types.verifySignupShort,
+			action: 'verifySignupShort',
 			value: { user: identifyUser, token: verifyShortToken },
 		});
 	}
 
 	sendResetPwd(identifyUser: User, notifierOptions?: NotifierOptions) {
 		return this.authManagement.create({
-			action: Types.sendResetPwd,
+			action: 'sendResetPwd',
 			value: identifyUser,
 			notifierOptions,
 		});
@@ -74,7 +72,7 @@ export default class AuthManagement {
 
 	resetPwdLong(resetToken: Token, password: Password) {
 		return this.authManagement.create({
-			action: Types.resetPwdLong,
+			action: 'resetPwdLong',
 			value: { token: resetToken, password },
 		});
 	}
@@ -85,7 +83,7 @@ export default class AuthManagement {
 		password: Password,
 	) {
 		return this.authManagement.create({
-			action: Types.resetPwdShort,
+			action: 'resetPwdShort',
 			value: {
 				user: identifyUser,
 				token: resetShortToken,
@@ -100,7 +98,7 @@ export default class AuthManagement {
 		identifyUser: User,
 	) {
 		return this.authManagement.create({
-			action: Types.passwordChange,
+			action: 'passwordChange',
 			value: { user: identifyUser, oldPassword, password },
 		});
 	}
@@ -111,7 +109,7 @@ export default class AuthManagement {
 		identifyUser: User,
 	) {
 		return this.authManagement.create({
-			action: Types.identityChange,
+			action: 'identityChange',
 			value: {
 				user: identifyUser,
 				password,
